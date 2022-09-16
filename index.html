@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Playing</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            -webkit-app-region: drag;
+            margin: 0;
+            padding: 10px;
+            font-family: 'Ubuntu', sans-serif;
+            background-image: linear-gradient(to bottom left, rgba(50, 50, 50, 0.75)50%, rgba(19, 173, 75, 0.75));
+            color: white;
+            -webkit-user-select: none;
+            cursor: grab;
+            line-height: 1.5;
+            text-align: right;
+            text-shadow: 0 0 5px black;
+            font-size: 16px;
+        }
+
+        div:not(#length) {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+        }
+
+        #bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 5%;
+            background-color: rgb(19, 173, 75);
+        }
+
+        #title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        #title_length {
+            display: flex;
+            color: #52ff91;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #length {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bg">
+
+    </div>
+    <div id="title_length">
+        <div id="length"></div>
+
+        <div id="title">
+        </div>
+    </div>
+    <div id="artist"></div>
+    <div id="album"></div>
+    <script>
+        const now_playing = require('./nowplaying.json');
+
+        let title_elt = document.getElementById('title')
+        let album_elt = document.getElementById('album')
+        let artist_elt = document.getElementById('artist')
+        let length_elt = document.getElementById('length')
+        let bg = document.getElementById('bg')
+
+
+     
+        let time = now_playing.length.split(':')
+        let secs = time.length > 2 ? ((parseInt(time[0]) * 3600) + parseInt(time[1]) * 60 + parseInt(time[2])) : ((parseInt(time[0]) * 60) + parseInt(time[1]));
+        let count = 0
+
+        let x = setInterval(function () {
+
+            count += 0.5
+            bg.style.width = count * 100 / secs + '%'
+            if (count > secs) {
+                clearInterval(x)
+            }
+        }, 500)
+
+        title_elt.innerText = now_playing.title
+        length_elt.innerText = now_playing.length
+        artist_elt.innerText = now_playing.artist
+        album_elt.innerText = now_playing.album
+
+
+
+    </script>
+
+</html>

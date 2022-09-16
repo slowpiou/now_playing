@@ -1,0 +1,19 @@
+{
+    "name": "now_playing",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-packager . --overwrite"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "electron-reload": "^1.5.0"
+    },
+    "devDependencies": {
+        "electron": "^6.0.7",
+        "electron-packager": "^14.0.5"
+    }
+}
